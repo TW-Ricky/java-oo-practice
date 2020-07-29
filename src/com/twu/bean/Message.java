@@ -2,17 +2,20 @@ package com.twu.bean;
 
 public class Message {
     private String name;
-    private int buyRanking;
-    private long votes;
-    private int multiple;
+    private Integer votes;
+    private Integer multiple;
+    private Integer buyRanking;
+    private Integer buyMoney;
 
     public Message() {
     }
 
-    public Message(String name, long votes, int multiple) {
+    public Message(String name, Integer votes, Integer multiple, Integer buyRanking, Integer buyMoney) {
         this.name = name;
         this.votes = votes;
         this.multiple = multiple;
+        this.buyRanking = buyRanking;
+        this.buyMoney = buyMoney;
     }
 
     @Override
@@ -22,7 +25,16 @@ public class Message {
                 ", buyRanking=" + buyRanking +
                 ", votes=" + votes +
                 ", multiple=" + multiple +
+                ", buyMoney=" + buyMoney +
                 '}';
+    }
+
+    public Integer getBuyMoney() {
+        return buyMoney;
+    }
+
+    public void setBuyMoney(Integer buyMoney) {
+        this.buyMoney = buyMoney;
     }
 
     public String getName() {
@@ -33,27 +45,27 @@ public class Message {
         this.name = name;
     }
 
-    public int getBuyRanking() {
+    public Integer getBuyRanking() {
         return buyRanking;
     }
 
-    public void setBuyRanking(int buyRanking) {
+    public void setBuyRanking(Integer buyRanking) {
         this.buyRanking = buyRanking;
     }
 
-    public long getVotes() {
+    public Integer getVotes() {
         return votes;
     }
 
-    public void setVotes(long votes) {
+    public void setVotes(Integer votes) {
         this.votes = votes;
     }
 
-    public int getMultiple() {
+    public Integer getMultiple() {
         return multiple;
     }
 
-    public void setMultiple(int multiple) {
+    public void setMultiple(Integer multiple) {
         this.multiple = multiple;
     }
 }

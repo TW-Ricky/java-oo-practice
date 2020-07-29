@@ -15,10 +15,16 @@ public class Main {
     private static final int USER_VOTES = 10;
     private static List<Message> messages = new ArrayList<>();
     private static List<User> users = new ArrayList<>();
+    private static HashMap<Integer, Integer> messageMaxMoney = new HashMap<>();
     private static HashMap<String, Object> session = new HashMap<>();
-    private static HashMap<String, Object> mySql = new HashMap<>();
     private static Scanner scanner = new Scanner(System.in);
 
+    /**
+     * 实现登录操作
+     * @param op
+     * op = 1: 用户登录
+     * op = 2：管理员登录
+     */
     static void login(int op) {
         String userName, userPassword;
         switch (op) {
@@ -51,8 +57,33 @@ public class Main {
         }
         session.put("messages", messages);
         session.put("user", user);
+        session.put("messageMaxMoney", messageMaxMoney);
     }
 
+    /**
+     * 退出登录时，更新假象数据库list中的信息：
+     *      messages：保存热搜的相关信息
+     *      users: 保存用户相关信息
+     *      messageMaxMoney: 保存购买排名需要的最低金额
+     *      session: 用户保存程序运行过程中的所有信息
+     */
+    static void logout() {
+        User user1 = (User) session.get("user");
+        users = users.stream().filter(it -> {
+            if (it.getName().equals(user1.getName())) {
+                it.setVotes(user1.getVotes());
+            }
+            return true;
+        }).collect(Collectors.toList());
+        messages = (List<Message>) session.get("messages");
+        messageMaxMoney = (HashMap<Integer, Integer>) session.get("messageMaxMoney");
+        session.remove("messages");
+        session.remove("user");
+    }
+
+    /**
+     * 登录之后的操作界面，根据用户输入的操作数执行对应的操作
+     */
     static void index(){
         User user = (User) session.get("user");
         while (true) {
@@ -81,32 +112,14 @@ public class Main {
                     break;
                 case "4":
                     if(user.isAdmin()) {
-                        User user1 = (User) session.get("user");
-                        users = users.stream().filter(it -> {
-                            if (it.getName().equals(user1.getName())) {
-                                it.setVotes(user1.getVotes());
-                            }
-                            return true;
-                        }).collect(Collectors.toList());
-                        messages = (List<Message>) session.get("messages");
-                        session.remove("messages");
-                        session.remove("user");
+                        logout();
                         return;
                     } else {
                         session = MessageUtil.add(session, false);
                     }
                     break;
                 case "5":
-                    User user1 = (User) session.get("user");
-                    users = users.stream().filter(it -> {
-                        if (it.getName().equals(user1.getName())) {
-                           it.setVotes(user1.getVotes());
-                        }
-                        return true;
-                    }).collect(Collectors.toList());
-                    messages = (List<Message>) session.get("messages");
-                    session.remove("messages");
-                    session.remove("user");
+                    logout();
                     return;
                 default:
                     InputError.overflowInput();
