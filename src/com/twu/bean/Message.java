@@ -1,21 +1,20 @@
 package com.twu.bean;
 
-public class User {
+public class Message {
     private String name;
-    private String password;
-    private Integer votes;
+    private int buyRanking;
+    private long votes;
 
-    public User(String name, String password, Integer votes) {
+    public Message(String name, long votes) {
         this.name = name;
-        this.password = password;
         this.votes = votes;
     }
 
     @Override
     public String toString() {
-        return "User{" +
+        return "Message{" +
                 "name='" + name + '\'' +
-                ", password='" + password + '\'' +
+                ", buyRanking=" + buyRanking +
                 ", votes=" + votes +
                 '}';
     }
@@ -28,19 +27,19 @@ public class User {
         this.name = name;
     }
 
-    public String getPassword() {
-        return password;
+    public int getBuyRanking() {
+        return buyRanking;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
+    public void setBuyRanking(int buyRanking) {
+        this.buyRanking = buyRanking;
     }
 
-    public Integer getVotes() {
+    public long getVotes() {
         return votes;
     }
 
-    public void setVotes(Integer votes) {
+    public void setVotes(long votes) {
         this.votes = votes;
     }
 }
