@@ -2,21 +2,24 @@ package com.twu.bean;
 
 public class User {
     private String name;
-    private String password;
     private Integer votes;
+    private boolean admin;
 
-    public User(String name, String password, Integer votes) {
+    public User() {
+    }
+
+    public User(String name, Integer votes, boolean admin) {
         this.name = name;
-        this.password = password;
         this.votes = votes;
+        this.admin = admin;
     }
 
     @Override
     public String toString() {
         return "User{" +
                 "name='" + name + '\'' +
-                ", password='" + password + '\'' +
                 ", votes=" + votes +
+                ", admin=" + admin +
                 '}';
     }
 
@@ -28,19 +31,19 @@ public class User {
         this.name = name;
     }
 
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
     public Integer getVotes() {
         return votes;
     }
 
     public void setVotes(Integer votes) {
         this.votes = votes;
+    }
+
+    public boolean isAdmin() {
+        return admin;
+    }
+
+    public void setAdmin(boolean admin) {
+        this.admin = admin;
     }
 }

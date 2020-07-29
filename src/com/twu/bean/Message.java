@@ -4,10 +4,15 @@ public class Message {
     private String name;
     private int buyRanking;
     private long votes;
+    private int multiple;
 
-    public Message(String name, long votes) {
+    public Message() {
+    }
+
+    public Message(String name, long votes, int multiple) {
         this.name = name;
         this.votes = votes;
+        this.multiple = multiple;
     }
 
     @Override
@@ -16,6 +21,7 @@ public class Message {
                 "name='" + name + '\'' +
                 ", buyRanking=" + buyRanking +
                 ", votes=" + votes +
+                ", multiple=" + multiple +
                 '}';
     }
 
@@ -41,5 +47,13 @@ public class Message {
 
     public void setVotes(long votes) {
         this.votes = votes;
+    }
+
+    public int getMultiple() {
+        return multiple;
+    }
+
+    public void setMultiple(int multiple) {
+        this.multiple = multiple;
     }
 }
