@@ -5,6 +5,7 @@ import com.twu.bean.User;
 
 import java.util.*;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class MessageUtil {
     private static final int SUPPER_MULTIPLE = 2;
@@ -24,7 +25,11 @@ public class MessageUtil {
                 return (int) (o2.getVotes() - o1.getVotes());
             }
         }).collect(Collectors.toList());
-        messages.stream().forEach(System.out::println);
+        List<Message> finalMessages = messages;
+        Stream.iterate(0, index -> index + 1).limit(messages.size()).forEach(index -> {
+            Message it = finalMessages.get(index);
+            System.out.println((index + 1) + " " + it.getName() + " " + it.getVotes());
+        });
         session.put("messages", messages);
         return session;
     }
